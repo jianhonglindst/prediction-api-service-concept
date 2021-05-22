@@ -108,7 +108,7 @@ class IRISParamsChecker(ParamsChecker):
     def check(self) -> Union[str, Dict]:
         if self.is_features_valid():
             return self.make_error_message(
-                error='InvalidFeatrueError',
+                error='InvalidFeatureError',
                 message='empty: {empty}, not_float: {not_float}, invalid_boundary: {invalid_boundary}.'.format(
                     empty=self.error_infomation['empty_features'],
                     not_float=self.error_infomation['not_float_features'],

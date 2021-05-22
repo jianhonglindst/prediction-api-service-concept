@@ -34,7 +34,7 @@ def test_predict_category_iris_status_params_error():
     # GET
     # STATUS: ParamsError
     params = {'sepal_length': 'string', 'sepal_width': None, 'petal_length': 7.5, 'petal_width': -999}
-    answer = {'success': False, 'status': 'ParamsError', 'error': 'InvalidFeatrueError'}
+    answer = {'success': False, 'status': 'ParamsError', 'error': 'InvalidFeatureError'}
 
     response = request(method='GET', url=url, params=params)
     return_body = json.loads(response.text)

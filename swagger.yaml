@@ -1,0 +1,115 @@
+swagger: "2.0"
+info:
+  description: "This is sample server: Prediction API concept server"
+  version: "1.0.0"
+  title: "Swagger: Prediction API Concept Server"
+  contact:
+    email: "lewis.lin1134@gmail.com"
+host: "localhost"
+tags:
+- name: "Predict"
+  description: "Prediction APIs"
+schemes:
+- "http"
+paths:
+  /predict/category/iris:
+    get:
+      tags:
+        - "Predict"
+      summary: "predict iris category"
+      description: "predict iris category by sepal_length, sepal_width, petal_length and petal_width"
+      operationId: "predictCategoryIris"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sepal_length"
+        in: "query"
+        description: "sepal_length, unit is `cm`"
+        required: true
+        type: "number"
+        default: 5.1
+      - name: "sepal_width"
+        in: "query"
+        description: "sepal_width, unit is `cm`"
+        required: true
+        type: "number"
+        default: 3.4
+      - name: "petal_length"
+        in: "query"
+        description: "petal_length, unit is `cm`"
+        required: true
+        type: "number"
+        default: 7.5
+      - name: "petal_width"
+        in: "query"
+        description: "petal_width, unit is `cm`"
+        required: true
+        type: "number"
+        default: 2.1
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/IRISCategoryOK"
+        "400":
+          description: "Invalid status value"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/IRISCategoryERROR"
+definitions:
+  IRISCategoryOK:
+    type: "object"
+    required:
+    - "success"
+    - "status"
+    properties:
+      success:
+        type: "boolean"
+      status:
+        type: "string"
+        example: "OK"
+      features:
+        type: "object"
+        properties:
+          sepal_length:
+            type: "number"
+            example: 5.1
+          sepal_width:
+            type: "number"
+            example: 3.4
+          petal_length:
+            type: "number"
+            example: 7.5
+          petal_width:
+            type: "number"
+            example: 2.1
+      result:
+        type: "object"
+        properties:
+          label:
+            type: "integer"
+            example: 2
+          category:
+            type: "string"
+            example: "virginica"
+  IRISCategoryERROR:
+    type: "object"
+    required:
+    - "success"
+    - "status"
+    properties:
+      success:
+        type: "boolean"
+        example: false
+      status:
+        type: "string"
+        example: "ParamsError"
+      error:
+        type: "string"
+        example: "InvalidFeatureError"
+      message:
+        type: "string"
+        example: "empty: ['petal_length'], not_float: ['sepal_width'], invalid_boundary: ['petal_width']."
