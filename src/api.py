@@ -86,3 +86,9 @@ class PredictCategoryIRIS:
                 'error': 'PredictError',
                 'message': str(err)
             }
+
+
+    def OPTIONS(self):
+        cherrypy.response.headers["Access-Control-Allow-Methods"] = "POST, OPTIONS"
+        cherrypy.response.headers["Access-Control-Allow-Headers"] = "Content-Type"
+        return ''

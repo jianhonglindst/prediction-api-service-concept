@@ -37,7 +37,11 @@ if __name__ == '__main__':
         script_name='/predict/category/iris',
         config={
             '/':
-                {'request.dispatch': cherrypy.dispatch.MethodDispatcher()}
+                {
+                    'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+                    "tools.response_headers.on": True,
+                    'tools.response_headers.headers': [('Access-Control-Allow-Origin', '*')]
+                }
         }
     )
 
